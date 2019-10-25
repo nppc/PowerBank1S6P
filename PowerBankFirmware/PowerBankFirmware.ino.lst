@@ -1,5 +1,5 @@
 
-C:\Users\Pavel\AppData\Local\Temp\arduino_build_98146/PowerBankFirmware.ino.elf:     file format elf32-avr
+C:\Users\Pavel\AppData\Local\Temp\arduino_build_833245/PowerBankFirmware.ino.elf:     file format elf32-avr
 
 
 Disassembly of section .text:
@@ -11,10 +11,10 @@ __vectors():
    4:	1c c0       	rjmp	.+56     	; 0x3e <__bad_interrupt>
    6:	1b c0       	rjmp	.+54     	; 0x3e <__bad_interrupt>
    8:	1a c0       	rjmp	.+52     	; 0x3e <__bad_interrupt>
-   a:	26 c0       	rjmp	.+76     	; 0x58 <__vector_5>
+   a:	1a c0       	rjmp	.+52     	; 0x40 <__vector_5>
    c:	18 c0       	rjmp	.+48     	; 0x3e <__bad_interrupt>
    e:	17 c0       	rjmp	.+46     	; 0x3e <__bad_interrupt>
-  10:	16 c0       	rjmp	.+44     	; 0x3e <__bad_interrupt>
+  10:	61 c0       	rjmp	.+194    	; 0xd4 <__vector_8>
   12:	15 c0       	rjmp	.+42     	; 0x3e <__bad_interrupt>
   14:	14 c0       	rjmp	.+40     	; 0x3e <__bad_interrupt>
   16:	13 c0       	rjmp	.+38     	; 0x3e <__bad_interrupt>
@@ -48,69 +48,20 @@ __do_clear_bss():
 
 00000034 <.do_clear_bss_start>:
 /home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2448
-  34:	a9 36       	cpi	r26, 0x69	; 105
+  34:	ad 36       	cpi	r26, 0x6D	; 109
 /home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2449
   36:	b2 07       	cpc	r27, r18
 /home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2450
   38:	e1 f7       	brne	.-8      	; 0x32 <.do_clear_bss_loop>
 .do_clear_bss_start():
-  3a:	58 d0       	rcall	.+176    	; 0xec <main>
-  3c:	9b c0       	rjmp	.+310    	; 0x174 <_exit>
+  3a:	56 d0       	rcall	.+172    	; 0xe8 <main>
+  3c:	10 c1       	rjmp	.+544    	; 0x25e <_exit>
 
 0000003e <__bad_interrupt>:
 __vector_1():
   3e:	e0 cf       	rjmp	.-64     	; 0x0 <__vectors>
 
-00000040 <delayReadADC()>:
-_Z12delayReadADCv():
-C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:13
-
-// ADC = Vin * 1024 / Vref
-
-uint16_t delayReadADC(){
-	//uint16_t c = 0;
-	while (bit_is_set(ADCSRA,ADSC));
-  40:	36 99       	sbic	0x06, 6	; 6
-  42:	fe cf       	rjmp	.-4      	; 0x40 <delayReadADC()>
-  44:	80 ed       	ldi	r24, 0xD0	; 208
-  46:	97 e0       	ldi	r25, 0x07	; 7
-C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:18
-	for(uint16_t i=0;i<2000;i++){ // about 1 sec
-    //sleep_enable();
-    //sleep_cpu();
-
-		bitSet (ADCSRA, ADSC); // Start conversion
-  48:	36 9a       	sbi	0x06, 6	; 6
-C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:19
-		while (bit_is_set(ADCSRA,ADSC));
-  4a:	36 99       	sbic	0x06, 6	; 6
-  4c:	fe cf       	rjmp	.-4      	; 0x4a <delayReadADC()+0xa>
-C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:21
-		//return ADC; // read the value
-		uint8_t low  = ADCL; // must read ADCL first
-  4e:	24 b1       	in	r18, 0x04	; 4
-C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:22
-		uint8_t high = ADCH;
-  50:	25 b1       	in	r18, 0x05	; 5
-  52:	01 97       	sbiw	r24, 0x01	; 1
-C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:14
-// ADC = Vin * 1024 / Vref
-
-uint16_t delayReadADC(){
-	//uint16_t c = 0;
-	while (bit_is_set(ADCSRA,ADSC));
-	for(uint16_t i=0;i<2000;i++){ // about 1 sec
-  54:	c9 f7       	brne	.-14     	; 0x48 <delayReadADC()+0x8>
-C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:26
-		uint8_t low  = ADCL; // must read ADCL first
-		uint8_t high = ADCH;
-    //c=(uint16_t)((high<<8) | low);
-	}
-  //return c;
-}
-  56:	08 95       	ret
-
-00000058 <__vector_5>:
+00000040 <__vector_5>:
 __vector_5():
 C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:130
 #else
@@ -119,28 +70,28 @@ C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\co
 
 #endif
 {
-  58:	1f 92       	push	r1
-  5a:	0f 92       	push	r0
-  5c:	0f b6       	in	r0, 0x3f	; 63
-  5e:	0f 92       	push	r0
-  60:	11 24       	eor	r1, r1
-  62:	2f 93       	push	r18
-  64:	3f 93       	push	r19
-  66:	8f 93       	push	r24
-  68:	9f 93       	push	r25
-  6a:	af 93       	push	r26
-  6c:	bf 93       	push	r27
+  40:	1f 92       	push	r1
+  42:	0f 92       	push	r0
+  44:	0f b6       	in	r0, 0x3f	; 63
+  46:	0f 92       	push	r0
+  48:	11 24       	eor	r1, r1
+  4a:	2f 93       	push	r18
+  4c:	3f 93       	push	r19
+  4e:	8f 93       	push	r24
+  50:	9f 93       	push	r25
+  52:	af 93       	push	r26
+  54:	bf 93       	push	r27
 C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:133
   // copy these to local variables so they can be stored in registers
   // (volatile variables must be read from memory on every access)
   unsigned long m = millis_timer_millis;
-  6e:	80 91 65 00 	lds	r24, 0x0065	; 0x800065 <millis_timer_millis>
-  72:	90 91 66 00 	lds	r25, 0x0066	; 0x800066 <millis_timer_millis+0x1>
-  76:	a0 91 67 00 	lds	r26, 0x0067	; 0x800067 <millis_timer_millis+0x2>
-  7a:	b0 91 68 00 	lds	r27, 0x0068	; 0x800068 <millis_timer_millis+0x3>
+  56:	80 91 69 00 	lds	r24, 0x0069	; 0x800069 <millis_timer_millis>
+  5a:	90 91 6a 00 	lds	r25, 0x006A	; 0x80006a <millis_timer_millis+0x1>
+  5e:	a0 91 6b 00 	lds	r26, 0x006B	; 0x80006b <millis_timer_millis+0x2>
+  62:	b0 91 6c 00 	lds	r27, 0x006C	; 0x80006c <millis_timer_millis+0x3>
 C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:134
   unsigned char f = millis_timer_fract;
-  7e:	30 91 64 00 	lds	r19, 0x0064	; 0x800064 <millis_timer_fract>
+  66:	30 91 68 00 	lds	r19, 0x0068	; 0x800068 <millis_timer_fract>
 C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:146
     f -= FRACT_MAX;
     m += 1;
@@ -148,24 +99,24 @@ C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\co
 ...rmv */
 
   f += FRACT_INC;
-  82:	26 e0       	ldi	r18, 0x06	; 6
-  84:	23 0f       	add	r18, r19
+  6a:	26 e0       	ldi	r18, 0x06	; 6
+  6c:	23 0f       	add	r18, r19
 C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:148
 
   if (f >= FRACT_MAX)
-  86:	2d 37       	cpi	r18, 0x7D	; 125
-  88:	68 f1       	brcs	.+90     	; 0xe4 <__vector_5+0x8c>
+  6e:	2d 37       	cpi	r18, 0x7D	; 125
+  70:	68 f1       	brcs	.+90     	; 0xcc <__vector_5+0x8c>
 C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:150
   {
     f -= FRACT_MAX;
-  8a:	29 e8       	ldi	r18, 0x89	; 137
-  8c:	23 0f       	add	r18, r19
+  72:	29 e8       	ldi	r18, 0x89	; 137
+  74:	23 0f       	add	r18, r19
 C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:152
   m += 1;
     m += MILLIS_INC;
-  8e:	03 96       	adiw	r24, 0x03	; 3
-  90:	a1 1d       	adc	r26, r1
-  92:	b1 1d       	adc	r27, r1
+  76:	03 96       	adiw	r24, 0x03	; 3
+  78:	a1 1d       	adc	r26, r1
+  7a:	b1 1d       	adc	r27, r1
 C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:159
   else
   {
@@ -173,26 +124,26 @@ C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\co
   }
 
   millis_timer_fract = f;
-  94:	20 93 64 00 	sts	0x0064, r18	; 0x800064 <millis_timer_fract>
+  7c:	20 93 68 00 	sts	0x0068, r18	; 0x800068 <millis_timer_fract>
 C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:160
   millis_timer_millis = m;
-  98:	80 93 65 00 	sts	0x0065, r24	; 0x800065 <millis_timer_millis>
-  9c:	90 93 66 00 	sts	0x0066, r25	; 0x800066 <millis_timer_millis+0x1>
-  a0:	a0 93 67 00 	sts	0x0067, r26	; 0x800067 <millis_timer_millis+0x2>
-  a4:	b0 93 68 00 	sts	0x0068, r27	; 0x800068 <millis_timer_millis+0x3>
+  80:	80 93 69 00 	sts	0x0069, r24	; 0x800069 <millis_timer_millis>
+  84:	90 93 6a 00 	sts	0x006A, r25	; 0x80006a <millis_timer_millis+0x1>
+  88:	a0 93 6b 00 	sts	0x006B, r26	; 0x80006b <millis_timer_millis+0x2>
+  8c:	b0 93 6c 00 	sts	0x006C, r27	; 0x80006c <millis_timer_millis+0x3>
 C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:161
   millis_timer_overflow_count++;
-  a8:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <_edata>
-  ac:	90 91 61 00 	lds	r25, 0x0061	; 0x800061 <_edata+0x1>
-  b0:	a0 91 62 00 	lds	r26, 0x0062	; 0x800062 <_edata+0x2>
-  b4:	b0 91 63 00 	lds	r27, 0x0063	; 0x800063 <_edata+0x3>
-  b8:	01 96       	adiw	r24, 0x01	; 1
-  ba:	a1 1d       	adc	r26, r1
-  bc:	b1 1d       	adc	r27, r1
-  be:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <_edata>
-  c2:	90 93 61 00 	sts	0x0061, r25	; 0x800061 <_edata+0x1>
-  c6:	a0 93 62 00 	sts	0x0062, r26	; 0x800062 <_edata+0x2>
-  ca:	b0 93 63 00 	sts	0x0063, r27	; 0x800063 <_edata+0x3>
+  90:	80 91 64 00 	lds	r24, 0x0064	; 0x800064 <millis_timer_overflow_count>
+  94:	90 91 65 00 	lds	r25, 0x0065	; 0x800065 <millis_timer_overflow_count+0x1>
+  98:	a0 91 66 00 	lds	r26, 0x0066	; 0x800066 <millis_timer_overflow_count+0x2>
+  9c:	b0 91 67 00 	lds	r27, 0x0067	; 0x800067 <millis_timer_overflow_count+0x3>
+  a0:	01 96       	adiw	r24, 0x01	; 1
+  a2:	a1 1d       	adc	r26, r1
+  a4:	b1 1d       	adc	r27, r1
+  a6:	80 93 64 00 	sts	0x0064, r24	; 0x800064 <millis_timer_overflow_count>
+  aa:	90 93 65 00 	sts	0x0065, r25	; 0x800065 <millis_timer_overflow_count+0x1>
+  ae:	a0 93 66 00 	sts	0x0066, r26	; 0x800066 <millis_timer_overflow_count+0x2>
+  b2:	b0 93 67 00 	sts	0x0067, r27	; 0x800067 <millis_timer_overflow_count+0x3>
 C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:168
 
 //MICROSECONDS_PER_MILLIS_OVERFLOW=2048
@@ -200,17 +151,17 @@ C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\co
 //FRACT_INC=6
 //FRACT_MAX=125
 }
-  ce:	bf 91       	pop	r27
-  d0:	af 91       	pop	r26
-  d2:	9f 91       	pop	r25
-  d4:	8f 91       	pop	r24
-  d6:	3f 91       	pop	r19
-  d8:	2f 91       	pop	r18
-  da:	0f 90       	pop	r0
-  dc:	0f be       	out	0x3f, r0	; 63
-  de:	0f 90       	pop	r0
-  e0:	1f 90       	pop	r1
-  e2:	18 95       	reti
+  b6:	bf 91       	pop	r27
+  b8:	af 91       	pop	r26
+  ba:	9f 91       	pop	r25
+  bc:	8f 91       	pop	r24
+  be:	3f 91       	pop	r19
+  c0:	2f 91       	pop	r18
+  c2:	0f 90       	pop	r0
+  c4:	0f be       	out	0x3f, r0	; 63
+  c6:	0f 90       	pop	r0
+  c8:	1f 90       	pop	r1
+  ca:	18 95       	reti
 C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:156
   m += 1;
     m += MILLIS_INC;
@@ -218,12 +169,34 @@ C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\co
   else
   {
     m += MILLIS_INC;
-  e4:	02 96       	adiw	r24, 0x02	; 2
-  e6:	a1 1d       	adc	r26, r1
-  e8:	b1 1d       	adc	r27, r1
-  ea:	d4 cf       	rjmp	.-88     	; 0x94 <__vector_5+0x3c>
+  cc:	02 96       	adiw	r24, 0x02	; 2
+  ce:	a1 1d       	adc	r26, r1
+  d0:	b1 1d       	adc	r27, r1
+  d2:	d4 cf       	rjmp	.-88     	; 0x7c <__vector_5+0x3c>
 
-000000ec <main>:
+000000d4 <__vector_8>:
+__vector_8():
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:82
+		res32+=(uint16_t)((high<<8) | low);
+	}
+	return res32 /32;
+}
+
+ISR(ADC_vect){ // else application is reset
+  d4:	1f 92       	push	r1
+  d6:	0f 92       	push	r0
+  d8:	0f b6       	in	r0, 0x3f	; 63
+  da:	0f 92       	push	r0
+  dc:	11 24       	eor	r1, r1
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:83
+}
+  de:	0f 90       	pop	r0
+  e0:	0f be       	out	0x3f, r0	; 63
+  e2:	0f 90       	pop	r0
+  e4:	1f 90       	pop	r1
+  e6:	18 95       	reti
+
+000000e8 <main>:
 main():
 C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/main.cpp:6
 #include <Arduino.h>
@@ -232,8 +205,8 @@ int main(void)
 {
   #ifdef TUNED_OSCCAL_VALUE
   OSCCAL = TUNED_OSCCAL_VALUE; //set the oscillator calibration value based on the pins_arduino.h file. If this is not set, it will be optimised away
-  ec:	81 b7       	in	r24, 0x31	; 49
-  ee:	81 bf       	out	0x31, r24	; 49
+  e8:	81 b7       	in	r24, 0x31	; 49
+  ea:	81 bf       	out	0x31, r24	; 49
 init():
 C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:802
   #endif
@@ -242,14 +215,14 @@ C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\co
   // Use the Millis Timer for fast PWM (unless it doesn't have an output).
   #if (TIMER_TO_USE_FOR_MILLIS == 0) && defined(WGM01)
   sbi(TCCR0A, WGM01);
-  f0:	8a b5       	in	r24, 0x2a	; 42
-  f2:	82 60       	ori	r24, 0x02	; 2
-  f4:	8a bd       	out	0x2a, r24	; 42
+  ec:	8a b5       	in	r24, 0x2a	; 42
+  ee:	82 60       	ori	r24, 0x02	; 2
+  f0:	8a bd       	out	0x2a, r24	; 42
 C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:803
   sbi(TCCR0A, WGM00);
-  f6:	8a b5       	in	r24, 0x2a	; 42
-  f8:	81 60       	ori	r24, 0x01	; 1
-  fa:	8a bd       	out	0x2a, r24	; 42
+  f2:	8a b5       	in	r24, 0x2a	; 42
+  f4:	81 60       	ori	r24, 0x01	; 1
+  f6:	8a bd       	out	0x2a, r24	; 42
 C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:826
   #endif
 
@@ -257,10 +230,10 @@ C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\co
   #if (TIMER_TO_USE_FOR_MILLIS == 0)
    #ifdef TCCR0B
     TCCR0B = (TCCR0B & ~((1<<CS02)|(1<<CS01)|(1<<CS00))) | (MillisTimer_Prescale_Index << CS00);
-  fc:	83 b7       	in	r24, 0x33	; 51
-  fe:	88 7f       	andi	r24, 0xF8	; 248
- 100:	82 60       	ori	r24, 0x02	; 2
- 102:	83 bf       	out	0x33, r24	; 51
+  f8:	83 b7       	in	r24, 0x33	; 51
+  fa:	88 7f       	andi	r24, 0xF8	; 248
+  fc:	82 60       	ori	r24, 0x02	; 2
+  fe:	83 bf       	out	0x33, r24	; 51
 C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:838
   TCCR1B = (TCCR1B & ~((1<<CS13)|(1<<CS12)|(1<<CS11)|(1<<CS10))) | (MillisTimer_Prescale_Index << CS10);
   #elif (TIMER_TO_USE_FOR_MILLIS == 1)
@@ -268,15 +241,15 @@ C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\co
   #endif
   // this needs to be called before setup() or some functions won't work there
   sei();
- 104:	78 94       	sei
+ 100:	78 94       	sei
 C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:842
 
   // Enable the overlow interrupt (this is the basic system tic-toc for millis)
   #if defined(TIMSK) && defined(TOIE0) && (TIMER_TO_USE_FOR_MILLIS == 0)
   sbi(TIMSK, TOIE0);
- 106:	89 b7       	in	r24, 0x39	; 57
- 108:	82 60       	ori	r24, 0x02	; 2
- 10a:	89 bf       	out	0x39, r24	; 57
+ 102:	89 b7       	in	r24, 0x39	; 57
+ 104:	82 60       	ori	r24, 0x02	; 2
+ 106:	89 bf       	out	0x39, r24	; 57
 initToneTimerInternal():
 C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:504
   TCCR0B |= (ToneTimer_Prescale_Index << CS00);
@@ -285,36 +258,36 @@ C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\co
   TCCR1B = 3; //prescaler of 64
   #elif (TIMER_TO_USE_FOR_TONE == 1) && defined(TCCR1)
   TCCR1 &= ~((1<<CS13) | (1<<CS12) | (1<<CS11) | (1<<CS10)); //stop the clock to configure
- 10c:	80 b7       	in	r24, 0x30	; 48
- 10e:	80 7f       	andi	r24, 0xF0	; 240
- 110:	80 bf       	out	0x30, r24	; 48
+ 108:	80 b7       	in	r24, 0x30	; 48
+ 10a:	80 7f       	andi	r24, 0xF0	; 240
+ 10c:	80 bf       	out	0x30, r24	; 48
 C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:506
   // Use the Tone Timer for fast PWM as phase correct not supported by this timer
   sbi(TCCR1, CTC1);
- 112:	80 b7       	in	r24, 0x30	; 48
- 114:	80 68       	ori	r24, 0x80	; 128
- 116:	80 bf       	out	0x30, r24	; 48
+ 10e:	80 b7       	in	r24, 0x30	; 48
+ 110:	80 68       	ori	r24, 0x80	; 128
+ 112:	80 bf       	out	0x30, r24	; 48
 C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:508
   //#if !defined(__AVR_ATtiny85__)
   sbi(TCCR1, PWM1A); //for the tiny 85, Timer0 is used instead.
- 118:	80 b7       	in	r24, 0x30	; 48
- 11a:	80 64       	ori	r24, 0x40	; 64
- 11c:	80 bf       	out	0x30, r24	; 48
+ 114:	80 b7       	in	r24, 0x30	; 48
+ 116:	80 64       	ori	r24, 0x40	; 64
+ 118:	80 bf       	out	0x30, r24	; 48
 C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:510
   //#endif
   sbi(GTCCR, PWM1B);
- 11e:	8c b5       	in	r24, 0x2c	; 44
- 120:	80 64       	ori	r24, 0x40	; 64
- 122:	8c bd       	out	0x2c, r24	; 44
+ 11a:	8c b5       	in	r24, 0x2c	; 44
+ 11c:	80 64       	ori	r24, 0x40	; 64
+ 11e:	8c bd       	out	0x2c, r24	; 44
 C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:511
   OCR1C = 0xFF; //Use 255 as the top to match with the others as this module doesn't have a 8bit PWM mode.
- 124:	8f ef       	ldi	r24, 0xFF	; 255
- 126:	8d bd       	out	0x2d, r24	; 45
+ 120:	8f ef       	ldi	r24, 0xFF	; 255
+ 122:	8d bd       	out	0x2d, r24	; 45
 C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:512
   TCCR1 |= (ToneTimer_Prescale_Index << CS10);
- 128:	80 b7       	in	r24, 0x30	; 48
- 12a:	84 60       	ori	r24, 0x04	; 4
- 12c:	80 bf       	out	0x30, r24	; 48
+ 124:	80 b7       	in	r24, 0x30	; 48
+ 126:	84 60       	ori	r24, 0x04	; 4
+ 128:	80 bf       	out	0x30, r24	; 48
 init():
 C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:862
 
@@ -323,111 +296,409 @@ C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\co
   #if defined(ADCSRA)
     // set a2d prescale factor
   ADCSRA = (ADCSRA & ~((1<<ADPS2)|(1<<ADPS1)|(1<<ADPS0))) | (ADC_ARDUINO_PRESCALER << ADPS0) | (1<<ADEN);
- 12e:	86 b1       	in	r24, 0x06	; 6
- 130:	88 77       	andi	r24, 0x78	; 120
- 132:	83 68       	ori	r24, 0x83	; 131
- 134:	86 b9       	out	0x06, r24	; 6
+ 12a:	86 b1       	in	r24, 0x06	; 6
+ 12c:	88 77       	andi	r24, 0x78	; 120
+ 12e:	83 68       	ori	r24, 0x83	; 131
+ 130:	86 b9       	out	0x06, r24	; 6
 C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:864
     // enable a2d conversions
     sbi(ADCSRA, ADEN);
- 136:	37 9a       	sbi	0x06, 7	; 6
+ 132:	37 9a       	sbi	0x06, 7	; 6
 setup():
-C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:30
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:86
 
 void setup() {
-  //cli; // no interrupts
-  noInterrupts();
- 138:	f8 94       	cli
-C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:33
+  cli(); // no interrupts
+ 134:	f8 94       	cli
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:87
+  TIMSK = 0; // disable timers interrupts
+ 136:	19 be       	out	0x39, r1	; 57
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:88
+  TCCR1 = (1<<CS13) | (1<<CS12); // bur tick timer with 2048 prescaller
+ 138:	8c e0       	ldi	r24, 0x0C	; 12
+ 13a:	80 bf       	out	0x30, r24	; 48
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:89
+  GIMSK = 0; // disable pin interrupts
+ 13c:	1b be       	out	0x3b, r1	; 59
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:92
 
   // power reduction
-  PRR = (1<<PRTIM1) | (1<<PRTIM0) | (1<<PRUSI);
- 13a:	8e e0       	ldi	r24, 0x0E	; 14
- 13c:	80 bd       	out	0x20, r24	; 32
-C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:34
+  PRR = (1<<PRTIM0) | (1<<PRUSI);
+ 13e:	86 e0       	ldi	r24, 0x06	; 6
+ 140:	80 bd       	out	0x20, r24	; 32
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:93
   ACSR = (1<<ACD); // power down analog comparator
- 13e:	80 e8       	ldi	r24, 0x80	; 128
- 140:	88 b9       	out	0x08, r24	; 8
-C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:38
+ 142:	80 e8       	ldi	r24, 0x80	; 128
+ 144:	88 b9       	out	0x08, r24	; 8
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:97
 
   //initialize pins
   //Float LED pins (OFF)
   DDRB = 0;
- 142:	17 ba       	out	0x17, r1	; 23
-C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:39
+ 146:	17 ba       	out	0x17, r1	; 23
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:98
   PORTB = 0;
- 144:	18 ba       	out	0x18, r1	; 24
-C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:42
+ 148:	18 ba       	out	0x18, r1	; 24
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:102
   
   // initialize ADC
-  DIDR0 = (1<<ADC1D); // disable digital input logic on ADC1
- 146:	84 e0       	ldi	r24, 0x04	; 4
- 148:	84 bb       	out	0x14, r24	; 20
-C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:43
+  //DIDR0 = (1<<ADC1D); // disable digital input logic on ADC1
   ADMUX = (1<<MUX0);	// ADC1 on PB2
  14a:	81 e0       	ldi	r24, 0x01	; 1
  14c:	87 b9       	out	0x07, r24	; 7
-C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:44
-  ADCSRA = (1<<ADEN) | (1<<ADPS2) | (1<<ADPS1)| (1<<ADPS0); // enable ADC with 16 divider and start first convertion
- 14e:	87 e8       	ldi	r24, 0x87	; 135
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:103
+  ADCSRA = (1<<ADEN) | (1<<ADPS2) | (1<<ADIE); // enable ADC with 16 divider and start first convertion. Interrupt should be enabled to wake up after conversion is completed
+ 14e:	8c e8       	ldi	r24, 0x8C	; 140
  150:	86 b9       	out	0x06, r24	; 6
-C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:46
-  //ADCSRA |= (1<<ADSC); // Start conversion
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:104
   bitSet (ADCSRA, ADSC); // Start conversion
  152:	36 9a       	sbi	0x06, 6	; 6
-C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:48
-  //while (ADCSRA & (1 << ADSC)); // wait for a/d complete
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:105
   while (bit_is_set(ADCSRA,ADSC)); // wait for a/d complete
  154:	36 99       	sbic	0x06, 6	; 6
- 156:	fe cf       	rjmp	.-4      	; 0x154 <main+0x68>
-C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:50
+ 156:	fe cf       	rjmp	.-4      	; 0x154 <main+0x6c>
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:108
   
-  set_sleep_mode(SLEEP_MODE_ADC);
+  //set_sleep_mode(SLEEP_MODE_ADC);
+  set_sleep_mode(SLEEP_MODE_IDLE); // we want timers to run
  158:	85 b7       	in	r24, 0x35	; 53
  15a:	87 7e       	andi	r24, 0xE7	; 231
- 15c:	88 60       	ori	r24, 0x08	; 8
- 15e:	85 bf       	out	0x35, r24	; 53
+ 15c:	85 bf       	out	0x35, r24	; 53
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:109
+  sleep_enable(); // set sleep enable bit
+ 15e:	85 b7       	in	r24, 0x35	; 53
+ 160:	80 62       	ori	r24, 0x20	; 32
+ 162:	85 bf       	out	0x35, r24	; 53
 loop():
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:117
+
+void loop() {
+  
+	uint8_t tmptmr = TCNT1;
+	if(ledmode==0){ // only blink in mode 0
+		if(tmptmr>128) DDRB = 1<<LED_RED; else DDRB = 0;
+ 164:	e2 e0       	ldi	r30, 0x02	; 2
+setLED():
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:58
+		}
+		// set the LED
+		if(newledmode!=ledmode){
+			ledmode = newledmode;
+			if(ledmode==3) DDRB = 1<<LED_GREEN;
+			else if(ledmode==2) DDRB = 1<<LED_ORANGE;
+ 166:	f8 e0       	ldi	r31, 0x08	; 8
 C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:57
-  //sleep_cpu();
+			else newledmode=0;
+		}
+		// set the LED
+		if(newledmode!=ledmode){
+			ledmode = newledmode;
+			if(ledmode==3) DDRB = 1<<LED_GREEN;
+ 168:	a0 e1       	ldi	r26, 0x10	; 16
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:51
+			else newledmode=0;
+		} else {
+			// charging pattern
+			if(curADC>975) newledmode=3;
+			else if(curADC>853) newledmode=2;
+			else if(curADC>731) newledmode=1;
+ 16a:	b1 e0       	ldi	r27, 0x01	; 1
+loop():
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:117
+
+void loop() {
+  
+	uint8_t tmptmr = TCNT1;
+	if(ledmode==0){ // only blink in mode 0
+		if(tmptmr>128) DDRB = 1<<LED_RED; else DDRB = 0;
+ 16c:	c2 e0       	ldi	r28, 0x02	; 2
+setLED():
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:56
+			else if(curADC>731) newledmode=1;
+			else newledmode=0;
+		}
+		// set the LED
+		if(newledmode!=ledmode){
+			ledmode = newledmode;
+ 16e:	d3 e0       	ldi	r29, 0x03	; 3
+loop():
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:115
+
 }
 
 void loop() {
-  uint16_t tmp;
-  bitSet(DDRB, LED_RED);
- 160:	b9 9a       	sbi	0x17, 1	; 23
-C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:58
-  delayReadADC();
- 162:	6e df       	rcall	.-292    	; 0x40 <delayReadADC()>
-C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:59
-  bitClear(DDRB, LED_RED);
- 164:	b9 98       	cbi	0x17, 1	; 23
-C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:60
-  bitSet(DDRB, LED_ORANGE);
- 166:	bb 9a       	sbi	0x17, 3	; 23
-C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:61
-  delayReadADC();
- 168:	6b df       	rcall	.-298    	; 0x40 <delayReadADC()>
-C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:62
-  bitClear(DDRB, LED_ORANGE);
- 16a:	bb 98       	cbi	0x17, 3	; 23
-C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:63
-  bitSet(DDRB, LED_GREEN);
- 16c:	bc 9a       	sbi	0x17, 4	; 23
-C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:64
-  delayReadADC();
- 16e:	68 df       	rcall	.-304    	; 0x40 <delayReadADC()>
-C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:65
-  bitClear(DDRB, LED_GREEN);
- 170:	bc 98       	cbi	0x17, 4	; 23
- 172:	f6 cf       	rjmp	.-20     	; 0x160 <main+0x74>
+  
+	uint8_t tmptmr = TCNT1;
+ 170:	8f b5       	in	r24, 0x2f	; 47
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:116
+	if(ledmode==0){ // only blink in mode 0
+ 172:	90 91 63 00 	lds	r25, 0x0063	; 0x800063 <ledmode>
+ 176:	91 11       	cpse	r25, r1
+ 178:	04 c0       	rjmp	.+8      	; 0x182 <main+0x9a>
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:117
+		if(tmptmr>128) DDRB = 1<<LED_RED; else DDRB = 0;
+ 17a:	81 38       	cpi	r24, 0x81	; 129
+ 17c:	08 f4       	brcc	.+2      	; 0x180 <main+0x98>
+ 17e:	3e c0       	rjmp	.+124    	; 0x1fc <main+0x114>
+ 180:	e7 bb       	out	0x17, r30	; 23
+ReadADC():
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:67
+	}
+}
 
-00000174 <_exit>:
+uint16_t ReadADC(){
+	uint16_t res32=0;	// accumulator register for ADC readings
+	while (bit_is_set(ADCSRA,ADSC)); // wait for any unclompleted ADC conversions
+ 182:	36 99       	sbic	0x06, 6	; 6
+ 184:	fe cf       	rjmp	.-4      	; 0x182 <main+0x9a>
+ 186:	20 e2       	ldi	r18, 0x20	; 32
+main():
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:66
+		
+	}
+}
+
+uint16_t ReadADC(){
+	uint16_t res32=0;	// accumulator register for ADC readings
+ 188:	90 e0       	ldi	r25, 0x00	; 0
+ 18a:	80 e0       	ldi	r24, 0x00	; 0
+ReadADC():
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:70
+	while (bit_is_set(ADCSRA,ADSC)); // wait for any unclompleted ADC conversions
+	for(uint8_t i=0;i<32;i++){ // about 1 sec. In reality will be 32 cycles
+		//do{
+			sei(); // conversion should start automatically after entering sleep mode
+ 18c:	78 94       	sei
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:71
+			sleep_cpu();
+ 18e:	88 95       	sleep
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:72
+			cli();
+ 190:	f8 94       	cli
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:75
+		//} while (bit_is_set(ADCSRA,ADSC));
+		//return ADC; // read the value
+		uint8_t low  = ADCL; // must read ADCL first
+ 192:	34 b1       	in	r19, 0x04	; 4
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:76
+		uint8_t high = ADCH;
+ 194:	65 b1       	in	r22, 0x05	; 5
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:77
+		res32+=(uint16_t)((high<<8) | low);
+ 196:	76 2f       	mov	r23, r22
+ 198:	63 2f       	mov	r22, r19
+ 19a:	86 0f       	add	r24, r22
+ 19c:	97 1f       	adc	r25, r23
+ 19e:	21 50       	subi	r18, 0x01	; 1
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:68
+}
+
+uint16_t ReadADC(){
+	uint16_t res32=0;	// accumulator register for ADC readings
+	while (bit_is_set(ADCSRA,ADSC)); // wait for any unclompleted ADC conversions
+	for(uint8_t i=0;i<32;i++){ // about 1 sec. In reality will be 32 cycles
+ 1a0:	a9 f7       	brne	.-22     	; 0x18c <main+0xa4>
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:79
+		//return ADC; // read the value
+		uint8_t low  = ADCL; // must read ADCL first
+		uint8_t high = ADCH;
+		res32+=(uint16_t)((high<<8) | low);
+	}
+	return res32 /32;
+ 1a2:	25 e0       	ldi	r18, 0x05	; 5
+ 1a4:	96 95       	lsr	r25
+ 1a6:	87 95       	ror	r24
+ 1a8:	2a 95       	dec	r18
+ 1aa:	e1 f7       	brne	.-8      	; 0x1a4 <main+0xbc>
+setLED():
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:37
+uint8_t blink=0;
+
+void setLED(int curADC){
+	uint8_t hyst = 2;
+	uint8_t newledmode=ledmode;
+	int hystval = curADC-oldADCval;
+ 1ac:	20 91 60 00 	lds	r18, 0x0060	; 0x800060 <_edata>
+ 1b0:	30 91 61 00 	lds	r19, 0x0061	; 0x800061 <_edata+0x1>
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:39
+	if(hystval<0) hystval=-hystval;
+	if(hystval>hyst){
+ 1b4:	bc 01       	movw	r22, r24
+ 1b6:	62 1b       	sub	r22, r18
+ 1b8:	73 0b       	sbc	r23, r19
+ 1ba:	9b 01       	movw	r18, r22
+ 1bc:	77 ff       	sbrs	r23, 7
+ 1be:	03 c0       	rjmp	.+6      	; 0x1c6 <main+0xde>
+ 1c0:	31 95       	neg	r19
+ 1c2:	21 95       	neg	r18
+ 1c4:	31 09       	sbc	r19, r1
+ 1c6:	23 30       	cpi	r18, 0x03	; 3
+ 1c8:	31 05       	cpc	r19, r1
+ 1ca:	5c f1       	brlt	.+86     	; 0x222 <main+0x13a>
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:36
+int oldADCval=0;
+uint8_t blink=0;
+
+void setLED(int curADC){
+	uint8_t hyst = 2;
+	uint8_t newledmode=ledmode;
+ 1cc:	30 91 63 00 	lds	r19, 0x0063	; 0x800063 <ledmode>
+ 1d0:	20 91 62 00 	lds	r18, 0x0062	; 0x800062 <charging>
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:40
+	int hystval = curADC-oldADCval;
+	if(hystval<0) hystval=-hystval;
+	if(hystval>hyst){
+		oldADCval = curADC;
+ 1d4:	90 93 61 00 	sts	0x0061, r25	; 0x800061 <_edata+0x1>
+ 1d8:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <_edata>
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:41
+		if(!charging){
+ 1dc:	21 11       	cpse	r18, r1
+ 1de:	10 c0       	rjmp	.+32     	; 0x200 <main+0x118>
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:43
+			// not charging pattern
+			if(curADC>877) newledmode=3;
+ 1e0:	8e 36       	cpi	r24, 0x6E	; 110
+ 1e2:	73 e0       	ldi	r23, 0x03	; 3
+ 1e4:	97 07       	cpc	r25, r23
+ 1e6:	78 f5       	brcc	.+94     	; 0x246 <main+0x15e>
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:44
+			else if(curADC>755) newledmode=2;
+ 1e8:	84 3f       	cpi	r24, 0xF4	; 244
+ 1ea:	22 e0       	ldi	r18, 0x02	; 2
+ 1ec:	92 07       	cpc	r25, r18
+ 1ee:	88 f5       	brcc	.+98     	; 0x252 <main+0x16a>
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:45
+			else if(curADC>682) newledmode=1;
+ 1f0:	21 e0       	ldi	r18, 0x01	; 1
+ 1f2:	8b 3a       	cpi	r24, 0xAB	; 171
+ 1f4:	92 40       	sbci	r25, 0x02	; 2
+ 1f6:	84 f4       	brge	.+32     	; 0x218 <main+0x130>
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:51
+			else newledmode=0;
+		} else {
+			// charging pattern
+			if(curADC>975) newledmode=3;
+			else if(curADC>853) newledmode=2;
+			else if(curADC>731) newledmode=1;
+ 1f8:	20 e0       	ldi	r18, 0x00	; 0
+ 1fa:	0e c0       	rjmp	.+28     	; 0x218 <main+0x130>
+loop():
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:117
+
+void loop() {
+  
+	uint8_t tmptmr = TCNT1;
+	if(ledmode==0){ // only blink in mode 0
+		if(tmptmr>128) DDRB = 1<<LED_RED; else DDRB = 0;
+ 1fc:	17 ba       	out	0x17, r1	; 23
+ 1fe:	c1 cf       	rjmp	.-126    	; 0x182 <main+0x9a>
+setLED():
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:49
+			else if(curADC>755) newledmode=2;
+			else if(curADC>682) newledmode=1;
+			else newledmode=0;
+		} else {
+			// charging pattern
+			if(curADC>975) newledmode=3;
+ 200:	80 3d       	cpi	r24, 0xD0	; 208
+ 202:	73 e0       	ldi	r23, 0x03	; 3
+ 204:	97 07       	cpc	r25, r23
+ 206:	f8 f4       	brcc	.+62     	; 0x246 <main+0x15e>
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:50
+			else if(curADC>853) newledmode=2;
+ 208:	86 35       	cpi	r24, 0x56	; 86
+ 20a:	23 e0       	ldi	r18, 0x03	; 3
+ 20c:	92 07       	cpc	r25, r18
+ 20e:	08 f5       	brcc	.+66     	; 0x252 <main+0x16a>
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:51
+			else if(curADC>731) newledmode=1;
+ 210:	21 e0       	ldi	r18, 0x01	; 1
+ 212:	8c 3d       	cpi	r24, 0xDC	; 220
+ 214:	92 40       	sbci	r25, 0x02	; 2
+ 216:	84 f3       	brlt	.-32     	; 0x1f8 <main+0x110>
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:55
+			else newledmode=0;
+		}
+		// set the LED
+		if(newledmode!=ledmode){
+ 218:	32 17       	cp	r19, r18
+ 21a:	19 f0       	breq	.+6      	; 0x222 <main+0x13a>
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:56
+			ledmode = newledmode;
+ 21c:	20 93 63 00 	sts	0x0063, r18	; 0x800063 <ledmode>
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:59
+			if(ledmode==3) DDRB = 1<<LED_GREEN;
+			else if(ledmode==2) DDRB = 1<<LED_ORANGE;
+			else DDRB = 1<<LED_RED; // 1 or 0
+ 220:	e7 bb       	out	0x17, r30	; 23
+loop():
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:123
+	}
+	
+	uint16_t adcVal = ReadADC();
+	setLED(adcVal);
+	
+	if(charging != bitRead(PINB,CHARGESENSEPIN)){
+ 222:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <charging>
+ 226:	96 b3       	in	r25, 0x16	; 22
+ 228:	49 2f       	mov	r20, r25
+ 22a:	41 70       	andi	r20, 0x01	; 1
+ 22c:	50 e0       	ldi	r21, 0x00	; 0
+ 22e:	84 17       	cp	r24, r20
+ 230:	15 06       	cpc	r1, r21
+ 232:	09 f4       	brne	.+2      	; 0x236 <main+0x14e>
+ 234:	9d cf       	rjmp	.-198    	; 0x170 <main+0x88>
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:124
+    charging = !charging;
+ 236:	8b 27       	eor	r24, r27
+ 238:	80 93 62 00 	sts	0x0062, r24	; 0x800062 <charging>
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:125
+    oldADCval = 0; //Force led update
+ 23c:	10 92 61 00 	sts	0x0061, r1	; 0x800061 <_edata+0x1>
+ 240:	10 92 60 00 	sts	0x0060, r1	; 0x800060 <_edata>
+ 244:	95 cf       	rjmp	.-214    	; 0x170 <main+0x88>
+setLED():
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:55
+			else if(curADC>853) newledmode=2;
+			else if(curADC>731) newledmode=1;
+			else newledmode=0;
+		}
+		// set the LED
+		if(newledmode!=ledmode){
+ 246:	33 30       	cpi	r19, 0x03	; 3
+ 248:	61 f3       	breq	.-40     	; 0x222 <main+0x13a>
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:56
+			ledmode = newledmode;
+ 24a:	d0 93 63 00 	sts	0x0063, r29	; 0x800063 <ledmode>
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:57
+			if(ledmode==3) DDRB = 1<<LED_GREEN;
+ 24e:	a7 bb       	out	0x17, r26	; 23
+ 250:	e8 cf       	rjmp	.-48     	; 0x222 <main+0x13a>
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:55
+			else if(curADC>853) newledmode=2;
+			else if(curADC>731) newledmode=1;
+			else newledmode=0;
+		}
+		// set the LED
+		if(newledmode!=ledmode){
+ 252:	32 30       	cpi	r19, 0x02	; 2
+ 254:	31 f3       	breq	.-52     	; 0x222 <main+0x13a>
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:56
+			ledmode = newledmode;
+ 256:	c0 93 63 00 	sts	0x0063, r28	; 0x800063 <ledmode>
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:58
+			if(ledmode==3) DDRB = 1<<LED_GREEN;
+			else if(ledmode==2) DDRB = 1<<LED_ORANGE;
+ 25a:	f7 bb       	out	0x17, r31	; 23
+ 25c:	e2 cf       	rjmp	.-60     	; 0x222 <main+0x13a>
+
+0000025e <_exit>:
 exit():
 /home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2278
- 174:	f8 94       	cli
+ 25e:	f8 94       	cli
 
-00000176 <__stop_program>:
+00000260 <__stop_program>:
 __stop_program():
 /home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2280
- 176:	ff cf       	rjmp	.-2      	; 0x176 <__stop_program>
+ 260:	ff cf       	rjmp	.-2      	; 0x260 <__stop_program>
