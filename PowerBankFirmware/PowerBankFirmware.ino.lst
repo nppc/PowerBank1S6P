@@ -1,0 +1,433 @@
+
+C:\Users\Pavel\AppData\Local\Temp\arduino_build_98146/PowerBankFirmware.ino.elf:     file format elf32-avr
+
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+__vectors():
+   0:	0e c0       	rjmp	.+28     	; 0x1e <__ctors_end>
+   2:	1d c0       	rjmp	.+58     	; 0x3e <__bad_interrupt>
+   4:	1c c0       	rjmp	.+56     	; 0x3e <__bad_interrupt>
+   6:	1b c0       	rjmp	.+54     	; 0x3e <__bad_interrupt>
+   8:	1a c0       	rjmp	.+52     	; 0x3e <__bad_interrupt>
+   a:	26 c0       	rjmp	.+76     	; 0x58 <__vector_5>
+   c:	18 c0       	rjmp	.+48     	; 0x3e <__bad_interrupt>
+   e:	17 c0       	rjmp	.+46     	; 0x3e <__bad_interrupt>
+  10:	16 c0       	rjmp	.+44     	; 0x3e <__bad_interrupt>
+  12:	15 c0       	rjmp	.+42     	; 0x3e <__bad_interrupt>
+  14:	14 c0       	rjmp	.+40     	; 0x3e <__bad_interrupt>
+  16:	13 c0       	rjmp	.+38     	; 0x3e <__bad_interrupt>
+  18:	12 c0       	rjmp	.+36     	; 0x3e <__bad_interrupt>
+  1a:	11 c0       	rjmp	.+34     	; 0x3e <__bad_interrupt>
+  1c:	10 c0       	rjmp	.+32     	; 0x3e <__bad_interrupt>
+
+0000001e <__ctors_end>:
+__trampolines_start():
+  1e:	11 24       	eor	r1, r1
+  20:	1f be       	out	0x3f, r1	; 63
+  22:	cf e5       	ldi	r28, 0x5F	; 95
+  24:	d2 e0       	ldi	r29, 0x02	; 2
+  26:	de bf       	out	0x3e, r29	; 62
+  28:	cd bf       	out	0x3d, r28	; 61
+
+0000002a <__do_clear_bss>:
+__do_clear_bss():
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2441
+  2a:	20 e0       	ldi	r18, 0x00	; 0
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2442
+  2c:	a0 e6       	ldi	r26, 0x60	; 96
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2443
+  2e:	b0 e0       	ldi	r27, 0x00	; 0
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2444
+  30:	01 c0       	rjmp	.+2      	; 0x34 <.do_clear_bss_start>
+
+00000032 <.do_clear_bss_loop>:
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2446
+  32:	1d 92       	st	X+, r1
+
+00000034 <.do_clear_bss_start>:
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2448
+  34:	a9 36       	cpi	r26, 0x69	; 105
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2449
+  36:	b2 07       	cpc	r27, r18
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2450
+  38:	e1 f7       	brne	.-8      	; 0x32 <.do_clear_bss_loop>
+.do_clear_bss_start():
+  3a:	58 d0       	rcall	.+176    	; 0xec <main>
+  3c:	9b c0       	rjmp	.+310    	; 0x174 <_exit>
+
+0000003e <__bad_interrupt>:
+__vector_1():
+  3e:	e0 cf       	rjmp	.-64     	; 0x0 <__vectors>
+
+00000040 <delayReadADC()>:
+_Z12delayReadADCv():
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:13
+
+// ADC = Vin * 1024 / Vref
+
+uint16_t delayReadADC(){
+	//uint16_t c = 0;
+	while (bit_is_set(ADCSRA,ADSC));
+  40:	36 99       	sbic	0x06, 6	; 6
+  42:	fe cf       	rjmp	.-4      	; 0x40 <delayReadADC()>
+  44:	80 ed       	ldi	r24, 0xD0	; 208
+  46:	97 e0       	ldi	r25, 0x07	; 7
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:18
+	for(uint16_t i=0;i<2000;i++){ // about 1 sec
+    //sleep_enable();
+    //sleep_cpu();
+
+		bitSet (ADCSRA, ADSC); // Start conversion
+  48:	36 9a       	sbi	0x06, 6	; 6
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:19
+		while (bit_is_set(ADCSRA,ADSC));
+  4a:	36 99       	sbic	0x06, 6	; 6
+  4c:	fe cf       	rjmp	.-4      	; 0x4a <delayReadADC()+0xa>
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:21
+		//return ADC; // read the value
+		uint8_t low  = ADCL; // must read ADCL first
+  4e:	24 b1       	in	r18, 0x04	; 4
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:22
+		uint8_t high = ADCH;
+  50:	25 b1       	in	r18, 0x05	; 5
+  52:	01 97       	sbiw	r24, 0x01	; 1
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:14
+// ADC = Vin * 1024 / Vref
+
+uint16_t delayReadADC(){
+	//uint16_t c = 0;
+	while (bit_is_set(ADCSRA,ADSC));
+	for(uint16_t i=0;i<2000;i++){ // about 1 sec
+  54:	c9 f7       	brne	.-14     	; 0x48 <delayReadADC()+0x8>
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:26
+		uint8_t low  = ADCL; // must read ADCL first
+		uint8_t high = ADCH;
+    //c=(uint16_t)((high<<8) | low);
+	}
+  //return c;
+}
+  56:	08 95       	ret
+
+00000058 <__vector_5>:
+__vector_5():
+C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:130
+#else
+
+#error Millis() timer not defined!
+
+#endif
+{
+  58:	1f 92       	push	r1
+  5a:	0f 92       	push	r0
+  5c:	0f b6       	in	r0, 0x3f	; 63
+  5e:	0f 92       	push	r0
+  60:	11 24       	eor	r1, r1
+  62:	2f 93       	push	r18
+  64:	3f 93       	push	r19
+  66:	8f 93       	push	r24
+  68:	9f 93       	push	r25
+  6a:	af 93       	push	r26
+  6c:	bf 93       	push	r27
+C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:133
+  // copy these to local variables so they can be stored in registers
+  // (volatile variables must be read from memory on every access)
+  unsigned long m = millis_timer_millis;
+  6e:	80 91 65 00 	lds	r24, 0x0065	; 0x800065 <millis_timer_millis>
+  72:	90 91 66 00 	lds	r25, 0x0066	; 0x800066 <millis_timer_millis+0x1>
+  76:	a0 91 67 00 	lds	r26, 0x0067	; 0x800067 <millis_timer_millis+0x2>
+  7a:	b0 91 68 00 	lds	r27, 0x0068	; 0x800068 <millis_timer_millis+0x3>
+C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:134
+  unsigned char f = millis_timer_fract;
+  7e:	30 91 64 00 	lds	r19, 0x0064	; 0x800064 <millis_timer_fract>
+C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:146
+    f -= FRACT_MAX;
+    m += 1;
+  }
+...rmv */
+
+  f += FRACT_INC;
+  82:	26 e0       	ldi	r18, 0x06	; 6
+  84:	23 0f       	add	r18, r19
+C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:148
+
+  if (f >= FRACT_MAX)
+  86:	2d 37       	cpi	r18, 0x7D	; 125
+  88:	68 f1       	brcs	.+90     	; 0xe4 <__vector_5+0x8c>
+C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:150
+  {
+    f -= FRACT_MAX;
+  8a:	29 e8       	ldi	r18, 0x89	; 137
+  8c:	23 0f       	add	r18, r19
+C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:152
+  m += 1;
+    m += MILLIS_INC;
+  8e:	03 96       	adiw	r24, 0x03	; 3
+  90:	a1 1d       	adc	r26, r1
+  92:	b1 1d       	adc	r27, r1
+C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:159
+  else
+  {
+    m += MILLIS_INC;
+  }
+
+  millis_timer_fract = f;
+  94:	20 93 64 00 	sts	0x0064, r18	; 0x800064 <millis_timer_fract>
+C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:160
+  millis_timer_millis = m;
+  98:	80 93 65 00 	sts	0x0065, r24	; 0x800065 <millis_timer_millis>
+  9c:	90 93 66 00 	sts	0x0066, r25	; 0x800066 <millis_timer_millis+0x1>
+  a0:	a0 93 67 00 	sts	0x0067, r26	; 0x800067 <millis_timer_millis+0x2>
+  a4:	b0 93 68 00 	sts	0x0068, r27	; 0x800068 <millis_timer_millis+0x3>
+C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:161
+  millis_timer_overflow_count++;
+  a8:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <_edata>
+  ac:	90 91 61 00 	lds	r25, 0x0061	; 0x800061 <_edata+0x1>
+  b0:	a0 91 62 00 	lds	r26, 0x0062	; 0x800062 <_edata+0x2>
+  b4:	b0 91 63 00 	lds	r27, 0x0063	; 0x800063 <_edata+0x3>
+  b8:	01 96       	adiw	r24, 0x01	; 1
+  ba:	a1 1d       	adc	r26, r1
+  bc:	b1 1d       	adc	r27, r1
+  be:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <_edata>
+  c2:	90 93 61 00 	sts	0x0061, r25	; 0x800061 <_edata+0x1>
+  c6:	a0 93 62 00 	sts	0x0062, r26	; 0x800062 <_edata+0x2>
+  ca:	b0 93 63 00 	sts	0x0063, r27	; 0x800063 <_edata+0x3>
+C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:168
+
+//MICROSECONDS_PER_MILLIS_OVERFLOW=2048
+//MILLIS_INC=2
+//FRACT_INC=6
+//FRACT_MAX=125
+}
+  ce:	bf 91       	pop	r27
+  d0:	af 91       	pop	r26
+  d2:	9f 91       	pop	r25
+  d4:	8f 91       	pop	r24
+  d6:	3f 91       	pop	r19
+  d8:	2f 91       	pop	r18
+  da:	0f 90       	pop	r0
+  dc:	0f be       	out	0x3f, r0	; 63
+  de:	0f 90       	pop	r0
+  e0:	1f 90       	pop	r1
+  e2:	18 95       	reti
+C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:156
+  m += 1;
+    m += MILLIS_INC;
+  }
+  else
+  {
+    m += MILLIS_INC;
+  e4:	02 96       	adiw	r24, 0x02	; 2
+  e6:	a1 1d       	adc	r26, r1
+  e8:	b1 1d       	adc	r27, r1
+  ea:	d4 cf       	rjmp	.-88     	; 0x94 <__vector_5+0x3c>
+
+000000ec <main>:
+main():
+C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/main.cpp:6
+#include <Arduino.h>
+
+int main(void)
+{
+  #ifdef TUNED_OSCCAL_VALUE
+  OSCCAL = TUNED_OSCCAL_VALUE; //set the oscillator calibration value based on the pins_arduino.h file. If this is not set, it will be optimised away
+  ec:	81 b7       	in	r24, 0x31	; 49
+  ee:	81 bf       	out	0x31, r24	; 49
+init():
+C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:802
+  #endif
+  #endif
+
+  // Use the Millis Timer for fast PWM (unless it doesn't have an output).
+  #if (TIMER_TO_USE_FOR_MILLIS == 0) && defined(WGM01)
+  sbi(TCCR0A, WGM01);
+  f0:	8a b5       	in	r24, 0x2a	; 42
+  f2:	82 60       	ori	r24, 0x02	; 2
+  f4:	8a bd       	out	0x2a, r24	; 42
+C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:803
+  sbi(TCCR0A, WGM00);
+  f6:	8a b5       	in	r24, 0x2a	; 42
+  f8:	81 60       	ori	r24, 0x01	; 1
+  fa:	8a bd       	out	0x2a, r24	; 42
+C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:826
+  #endif
+
+  // Millis timer is always processor clock divided by MillisTimer_Prescale_Value (64)
+  #if (TIMER_TO_USE_FOR_MILLIS == 0)
+   #ifdef TCCR0B
+    TCCR0B = (TCCR0B & ~((1<<CS02)|(1<<CS01)|(1<<CS00))) | (MillisTimer_Prescale_Index << CS00);
+  fc:	83 b7       	in	r24, 0x33	; 51
+  fe:	88 7f       	andi	r24, 0xF8	; 248
+ 100:	82 60       	ori	r24, 0x02	; 2
+ 102:	83 bf       	out	0x33, r24	; 51
+C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:838
+  TCCR1B = (TCCR1B & ~((1<<CS13)|(1<<CS12)|(1<<CS11)|(1<<CS10))) | (MillisTimer_Prescale_Index << CS10);
+  #elif (TIMER_TO_USE_FOR_MILLIS == 1)
+  TCCR1B = (TCCR1B & ~((1<<CS12)|(1<<CS11)|(1<<CS10))) | (MillisTimer_Prescale_Index << CS10);
+  #endif
+  // this needs to be called before setup() or some functions won't work there
+  sei();
+ 104:	78 94       	sei
+C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:842
+
+  // Enable the overlow interrupt (this is the basic system tic-toc for millis)
+  #if defined(TIMSK) && defined(TOIE0) && (TIMER_TO_USE_FOR_MILLIS == 0)
+  sbi(TIMSK, TOIE0);
+ 106:	89 b7       	in	r24, 0x39	; 57
+ 108:	82 60       	ori	r24, 0x02	; 2
+ 10a:	89 bf       	out	0x39, r24	; 57
+initToneTimerInternal():
+C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:504
+  TCCR0B |= (ToneTimer_Prescale_Index << CS00);
+  #elif defined(__AVR_ATtiny43__)
+  TCCR1A = 3; //WGM 10=1, WGM11=1
+  TCCR1B = 3; //prescaler of 64
+  #elif (TIMER_TO_USE_FOR_TONE == 1) && defined(TCCR1)
+  TCCR1 &= ~((1<<CS13) | (1<<CS12) | (1<<CS11) | (1<<CS10)); //stop the clock to configure
+ 10c:	80 b7       	in	r24, 0x30	; 48
+ 10e:	80 7f       	andi	r24, 0xF0	; 240
+ 110:	80 bf       	out	0x30, r24	; 48
+C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:506
+  // Use the Tone Timer for fast PWM as phase correct not supported by this timer
+  sbi(TCCR1, CTC1);
+ 112:	80 b7       	in	r24, 0x30	; 48
+ 114:	80 68       	ori	r24, 0x80	; 128
+ 116:	80 bf       	out	0x30, r24	; 48
+C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:508
+  //#if !defined(__AVR_ATtiny85__)
+  sbi(TCCR1, PWM1A); //for the tiny 85, Timer0 is used instead.
+ 118:	80 b7       	in	r24, 0x30	; 48
+ 11a:	80 64       	ori	r24, 0x40	; 64
+ 11c:	80 bf       	out	0x30, r24	; 48
+C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:510
+  //#endif
+  sbi(GTCCR, PWM1B);
+ 11e:	8c b5       	in	r24, 0x2c	; 44
+ 120:	80 64       	ori	r24, 0x40	; 64
+ 122:	8c bd       	out	0x2c, r24	; 44
+C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:511
+  OCR1C = 0xFF; //Use 255 as the top to match with the others as this module doesn't have a 8bit PWM mode.
+ 124:	8f ef       	ldi	r24, 0xFF	; 255
+ 126:	8d bd       	out	0x2d, r24	; 45
+C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:512
+  TCCR1 |= (ToneTimer_Prescale_Index << CS10);
+ 128:	80 b7       	in	r24, 0x30	; 48
+ 12a:	84 60       	ori	r24, 0x04	; 4
+ 12c:	80 bf       	out	0x30, r24	; 48
+init():
+C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:862
+
+  // Initialize the ADC
+  #if defined( INITIALIZE_ANALOG_TO_DIGITAL_CONVERTER ) && INITIALIZE_ANALOG_TO_DIGITAL_CONVERTER
+  #if defined(ADCSRA)
+    // set a2d prescale factor
+  ADCSRA = (ADCSRA & ~((1<<ADPS2)|(1<<ADPS1)|(1<<ADPS0))) | (ADC_ARDUINO_PRESCALER << ADPS0) | (1<<ADEN);
+ 12e:	86 b1       	in	r24, 0x06	; 6
+ 130:	88 77       	andi	r24, 0x78	; 120
+ 132:	83 68       	ori	r24, 0x83	; 131
+ 134:	86 b9       	out	0x06, r24	; 6
+C:\Users\Pavel\AppData\Local\Arduino15\packages\ATTinyCore\hardware\avr\1.3.1\cores\tiny/wiring.c:864
+    // enable a2d conversions
+    sbi(ADCSRA, ADEN);
+ 136:	37 9a       	sbi	0x06, 7	; 6
+setup():
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:30
+
+void setup() {
+  //cli; // no interrupts
+  noInterrupts();
+ 138:	f8 94       	cli
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:33
+
+  // power reduction
+  PRR = (1<<PRTIM1) | (1<<PRTIM0) | (1<<PRUSI);
+ 13a:	8e e0       	ldi	r24, 0x0E	; 14
+ 13c:	80 bd       	out	0x20, r24	; 32
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:34
+  ACSR = (1<<ACD); // power down analog comparator
+ 13e:	80 e8       	ldi	r24, 0x80	; 128
+ 140:	88 b9       	out	0x08, r24	; 8
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:38
+
+  //initialize pins
+  //Float LED pins (OFF)
+  DDRB = 0;
+ 142:	17 ba       	out	0x17, r1	; 23
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:39
+  PORTB = 0;
+ 144:	18 ba       	out	0x18, r1	; 24
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:42
+  
+  // initialize ADC
+  DIDR0 = (1<<ADC1D); // disable digital input logic on ADC1
+ 146:	84 e0       	ldi	r24, 0x04	; 4
+ 148:	84 bb       	out	0x14, r24	; 20
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:43
+  ADMUX = (1<<MUX0);	// ADC1 on PB2
+ 14a:	81 e0       	ldi	r24, 0x01	; 1
+ 14c:	87 b9       	out	0x07, r24	; 7
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:44
+  ADCSRA = (1<<ADEN) | (1<<ADPS2) | (1<<ADPS1)| (1<<ADPS0); // enable ADC with 16 divider and start first convertion
+ 14e:	87 e8       	ldi	r24, 0x87	; 135
+ 150:	86 b9       	out	0x06, r24	; 6
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:46
+  //ADCSRA |= (1<<ADSC); // Start conversion
+  bitSet (ADCSRA, ADSC); // Start conversion
+ 152:	36 9a       	sbi	0x06, 6	; 6
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:48
+  //while (ADCSRA & (1 << ADSC)); // wait for a/d complete
+  while (bit_is_set(ADCSRA,ADSC)); // wait for a/d complete
+ 154:	36 99       	sbic	0x06, 6	; 6
+ 156:	fe cf       	rjmp	.-4      	; 0x154 <main+0x68>
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:50
+  
+  set_sleep_mode(SLEEP_MODE_ADC);
+ 158:	85 b7       	in	r24, 0x35	; 53
+ 15a:	87 7e       	andi	r24, 0xE7	; 231
+ 15c:	88 60       	ori	r24, 0x08	; 8
+ 15e:	85 bf       	out	0x35, r24	; 53
+loop():
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:57
+  //sleep_cpu();
+}
+
+void loop() {
+  uint16_t tmp;
+  bitSet(DDRB, LED_RED);
+ 160:	b9 9a       	sbi	0x17, 1	; 23
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:58
+  delayReadADC();
+ 162:	6e df       	rcall	.-292    	; 0x40 <delayReadADC()>
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:59
+  bitClear(DDRB, LED_RED);
+ 164:	b9 98       	cbi	0x17, 1	; 23
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:60
+  bitSet(DDRB, LED_ORANGE);
+ 166:	bb 9a       	sbi	0x17, 3	; 23
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:61
+  delayReadADC();
+ 168:	6b df       	rcall	.-298    	; 0x40 <delayReadADC()>
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:62
+  bitClear(DDRB, LED_ORANGE);
+ 16a:	bb 98       	cbi	0x17, 3	; 23
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:63
+  bitSet(DDRB, LED_GREEN);
+ 16c:	bc 9a       	sbi	0x17, 4	; 23
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:64
+  delayReadADC();
+ 16e:	68 df       	rcall	.-304    	; 0x40 <delayReadADC()>
+C:\src\Tennp\Git\PowerBank1S6P\PowerBankFirmware/PowerBankFirmware.ino:65
+  bitClear(DDRB, LED_GREEN);
+ 170:	bc 98       	cbi	0x17, 4	; 23
+ 172:	f6 cf       	rjmp	.-20     	; 0x160 <main+0x74>
+
+00000174 <_exit>:
+exit():
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2278
+ 174:	f8 94       	cli
+
+00000176 <__stop_program>:
+__stop_program():
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2280
+ 176:	ff cf       	rjmp	.-2      	; 0x176 <__stop_program>
